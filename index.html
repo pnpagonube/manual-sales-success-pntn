@@ -346,6 +346,127 @@
 
     footer p strong { color: var(--black); }
 
+    /* ── FLOW SUBHEAD ── */
+    .flow-intro {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.65;
+      margin-bottom: 26px;
+      max-width: 660px;
+    }
+
+    .flow-subhead {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin: 8px 0 16px;
+    }
+
+    .flow-subhead-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .flow-subhead h3 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--black);
+    }
+
+    .sla-badge {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-ok);
+      background: #f0fdf7;
+      border: 1.5px solid #a7f3d0;
+      padding: 3px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── NUMBERED STEPS ── */
+    .steps {
+      counter-reset: step;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 36px;
+    }
+
+    .step {
+      background: var(--white);
+      border: 1.5px solid var(--gray-light);
+      border-radius: 14px;
+      padding: 18px 22px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .step:hover {
+      border-color: #b3c4ff;
+      box-shadow: 0 4px 20px rgba(26, 86, 255, 0.07);
+    }
+
+    .step-num {
+      counter-increment: step;
+      flex-shrink: 0;
+      width: 30px; height: 30px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px;
+    }
+
+    .step-num::before { content: counter(step); }
+
+    .step-body { flex: 1; }
+
+    .step-body h4 {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+      letter-spacing: -0.2px;
+      line-height: 1.45;
+    }
+
+    .step-body p {
+      font-size: 13.5px;
+      color: var(--gray-dark);
+      line-height: 1.6;
+    }
+
+    .step-body a {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--blue);
+    }
+
+    .status-chip {
+      display: inline-block;
+      font-size: 11.5px;
+      font-weight: 700;
+      padding: 1px 9px;
+      border-radius: 20px;
+      background: var(--blue-pale);
+      color: var(--blue);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
       .hero, .container, footer { padding-left: 20px; padding-right: 20px; }
@@ -355,6 +476,8 @@
       .timeline-step:first-child { border-radius: 14px; }
       .timeline-step:last-child  { border-radius: 14px; }
       .timeline-step + .timeline-step { border-left: 1.5px solid var(--gray-light); }
+      .flow-subhead h3 { font-size: 16px; }
+      .sla-badge { margin-left: 0; }
     }
   </style>
 </head>
@@ -469,6 +592,123 @@
           <p>El alta de una promoción puede demorar <strong>varios días o semanas</strong>, especialmente la primera de cada merchant. Es fundamental trasladar esto con claridad y planificar desde el inicio.</p>
         </div>
 
+      </div>
+    </div>
+
+    <!-- PROCESO DE CONFIGURACIÓN PASO A PASO -->
+    <div class="section-block">
+      <div class="section-heading">Proceso de configuración · paso a paso</div>
+      <p class="flow-intro">Hoy ofrecemos la configuración de promociones bancarias a algunos merchants del segmento <strong>MM</strong>. El acuerdo y los términos de cada promo dependen de una negociación propia entre el merchant y su banco. El flujo cambia según sea la <strong>primera</strong> promo del merchant o una <strong>posterior</strong>.</p>
+
+      <!-- ESCENARIO A -->
+      <div class="flow-subhead">
+        <span class="flow-subhead-tag">Escenario A</span>
+        <h3>Configuración inicial · primera promo del merchant</h3>
+        <span class="sla-badge">SLA dLocal · 10 días hábiles</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>El merchant solicita configurar su primera promo</h4>
+          <p>El merchant te pide dar de alta su/s primera/s promoción/es en MODO.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Compartir la Carta Oferta (T&amp;C)</h4>
+          <p>El merchant te comparte los términos y condiciones de la promoción. <a href="#" target="_blank">Ver ejemplo →</a></p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Validar banco y T&amp;C</h4>
+          <p>Verificá que el banco esté dentro del ecosistema de MODO y que los T&amp;C contengan todos los detalles que necesitamos.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Cargar la promo en el documento &nbsp;→&nbsp; <span class="status-chip">Pendiente credenciales</span></h4>
+          <p>Completá el documento con la/s promo/es a configurar. Queda en status <strong>Pendiente credenciales</strong>.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Cargar la Carta Oferta</h4>
+          <p>Subí la Carta Oferta (T&amp;C) en <strong>Promos MODO · Carta Oferta || PN&amp;dLoc</strong>.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Avisar a dLocal</h4>
+          <p>Notificá en <strong>#modo-dlocal-pagonube</strong> que cargaste nuevas promos (arrobá a Tincho).</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>dLocal genera establecimientos &nbsp;→&nbsp; <span class="status-chip">Pendiente dLocal</span> &nbsp;→&nbsp; <span class="status-chip">Activa</span></h4>
+          <p>dLocal tiene hasta <strong>10 días hábiles</strong> para completar los establecimientos (status <strong>Pendiente dLocal</strong>) y configurar la promo en el fee manager (status <strong>Activa</strong>). Los establecimientos son <strong>genéricos por merchant</strong>: se reutilizan para todas sus promos futuras. Recién en <strong>Activa</strong> podés compartirle las credenciales al merchant.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>El merchant entrega el Site ID al banco</h4>
+          <p>El merchant le da los establecimientos / Site ID al banco y le pide configurar la promo en MODO. El funcionamiento depende <strong>exclusivamente del banco</strong>: ni dLocal ni Pago Nube pueden intervenir.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Recordar la visualización de MODO</h4>
+          <p>Recordale al merchant avisar a la agencia/banco que necesita la <strong>configuración de visualización de MODO</strong> para su tienda online.</p>
+        </div></div>
+      </div>
+
+      <!-- ESCENARIO B -->
+      <div class="flow-subhead">
+        <span class="flow-subhead-tag">Escenario B</span>
+        <h3>Configuraciones posteriores · merchant con establecimientos ya generados</h3>
+        <span class="sla-badge">SLA dLocal · 72 hs hábiles</span>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>El merchant pide una nueva promo o una modificación</h4>
+          <p>Aplica a merchants que ya tienen establecimientos generados por una promo anterior.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Compartir la Carta Oferta y validar</h4>
+          <p>El merchant comparte los T&amp;C. Validá que el banco esté en el ecosistema de MODO y que los T&amp;C tengan todos los detalles. <a href="#" target="_blank">Ver ejemplo →</a></p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Cargar la promo en el documento &nbsp;→&nbsp; <span class="status-chip">Pendiente dLocal</span></h4>
+          <p>Completá el documento con la/s promo/es. Como ya hay establecimientos, arranca directo en status <strong>Pendiente dLocal</strong>.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Avisar a dLocal</h4>
+          <p>Notificá en <strong>#modo-dlocal-pagonube</strong> (arrobá a Tincho).</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>dLocal configura en el fee manager &nbsp;→&nbsp; <span class="status-chip">Activa</span></h4>
+          <p>dLocal tiene hasta <strong>72 hs hábiles</strong> para configurar la promo. Al hacerlo, completa la fecha de activación en la planilla y queda en status <strong>Activa</strong>.</p>
+        </div></div>
+        <div class="step"><div class="step-num"></div><div class="step-body">
+          <h4>Compartir credenciales y avisar al banco</h4>
+          <p>Compartíle al merchant las credenciales ya creadas para que se las dé al banco y solicite configurar la promo en MODO. Recordale también la <strong>visualización de MODO</strong> para la tienda online.</p>
+        </div></div>
+      </div>
+
+      <!-- CALLOUT: timing de credenciales -->
+      <div class="callout">
+        <div class="callout-icon">⏱️</div>
+        <p><strong>¿Cuándo compartir las credenciales en configuraciones posteriores?</strong> Si las compartís apenas le pedís la promo a dLocal, tené en cuenta que hasta que la configure en el fee manager el <strong>cobro de fees no está automatizado</strong>. Si esperás a que dLocal confirme la activación, te asegurás de que los fees se cobren correctamente desde el inicio.</p>
+      </div>
+    </div>
+
+    <!-- ESTADOS DE UNA PROMO -->
+    <div class="section-block">
+      <div class="section-heading">Estados de una promoción</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="t-num">Estado 1</div>
+          <div class="t-label">Pendiente credenciales</div>
+          <div class="t-desc">Solo en la primera promo. Esperando que dLocal genere los establecimientos / Site ID.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-num">Estado 2</div>
+          <div class="t-label">Pendiente dLocal</div>
+          <div class="t-desc">dLocal debe configurar la promo en el fee manager.</div>
+        </div>
+        <div class="timeline-step active">
+          <div class="t-num">Estado 3</div>
+          <div class="t-label">Activa</div>
+          <div class="t-desc">Configurada en el fee manager. Ya podés compartir las credenciales con el merchant.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-num">Estado 4</div>
+          <div class="t-label">Expirada</div>
+          <div class="t-desc">Venció la vigencia (automático). Comercial consulta al merchant si renueva y actualiza el documento.</div>
+        </div>
       </div>
     </div>
 
