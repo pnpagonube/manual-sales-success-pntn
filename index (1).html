@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alta de Promociones MODO · Pago Nube</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,700&family=DM+Serif+Display:ital@1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --blue: #1A56FF;
+      --blue-light: #3B71FE;
+      --blue-pale: #EEF2FF;
+      --black: #0D0D0D;
+      --gray-dark: #3D3D3D;
+      --gray-mid: #7A7A7A;
+      --gray-light: #E8E8E8;
+      --bg: #F8F8F6;
+      --white: #FFFFFF;
+      --yellow-soft: #FEFAE8;
+      --orange-warn: #FF6B35;
+      --green-ok: #1DAF72;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--black);
+      min-height: 100vh;
+      padding: 0 0 80px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      border-bottom: 1.5px solid var(--gray-light);
+      padding: 18px 48px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .badge-n {
+      width: 36px; height: 36px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+    }
+
+    .header-label {
+      font-size: 14px;
+      color: var(--gray-mid);
+      font-weight: 500;
+    }
+
+    .header-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .header-tag {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 64px 48px 48px;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+      color: var(--black);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 em {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      color: var(--blue);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--gray-mid);
+      font-weight: 400;
+      margin-top: 16px;
+      max-width: 620px;
+      line-height: 1.6;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 900px;
+      padding: 0 48px;
+      margin: 0 auto;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-heading {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--blue-pale);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-heading::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--blue);
+    }
+
+    .section-intro {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.65;
+      margin-bottom: 24px;
+      max-width: 680px;
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .cards-grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1.5px solid var(--gray-light);
+      border-radius: 14px;
+      padding: 26px 28px;
+      position: relative;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .card:hover {
+      border-color: #b3c4ff;
+      box-shadow: 0 4px 20px rgba(26, 86, 255, 0.07);
+    }
+
+    .card.accent-top {
+      border-top: 3px solid var(--blue);
+    }
+
+    .card.warn {
+      border-top: 3px solid var(--orange-warn);
+    }
+
+    .card.positive {
+      border-top: 3px solid var(--green-ok);
+    }
+
+    .card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .card-step {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 8px;
+    }
+
+    .card.warn .card-step {
+      color: var(--orange-warn);
+    }
+
+    .card.positive .card-step {
+      color: var(--green-ok);
+    }
+
+    .card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.65;
+    }
+
+    .card a {
+      color: var(--blue);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--blue);
+    }
+
+    /* ── PILL TAGS ── */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1.5px solid;
+    }
+
+    .pill.ok {
+      color: var(--green-ok);
+      border-color: #a7f3d0;
+      background: #f0fdf7;
+    }
+
+    .pill.no {
+      color: #c0392b;
+      border-color: #fecaca;
+      background: #fff5f5;
+      text-decoration: line-through;
+    }
+
+    /* ── TIMELINE ROW ── */
+    .timeline {
+      display: flex;
+      gap: 0;
+      margin-bottom: 40px;
+    }
+
+    .timeline-step {
+      flex: 1;
+      padding: 22px 24px;
+      background: var(--white);
+      border: 1.5px solid var(--gray-light);
+      position: relative;
+    }
+
+    .timeline-step:first-child { border-radius: 14px 0 0 14px; }
+    .timeline-step:last-child  { border-radius: 0 14px 14px 0; }
+    .timeline-step + .timeline-step { border-left: none; }
+
+    .timeline-step.active {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .timeline-step.active .t-num,
+    .timeline-step.active .t-label,
+    .timeline-step.active .t-desc {
+      color: var(--white);
+    }
+
+    .t-num {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .t-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .t-desc {
+      font-size: 12.5px;
+      color: var(--gray-mid);
+      line-height: 1.5;
+    }
+
+    /* ── CALLOUT ── */
+    .callout {
+      background: var(--yellow-soft);
+      border: 1.5px solid #e8dfa0;
+      border-radius: 14px;
+      padding: 22px 28px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+
+    .callout.info {
+      background: var(--blue-pale);
+      border-color: #c7d6ff;
+    }
+
+    .callout-icon {
+      font-size: 22px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout p {
+      font-size: 14px;
+      color: var(--gray-dark);
+      line-height: 1.65;
+    }
+
+    .callout strong {
+      color: var(--black);
+    }
+
+    /* ── SECTION SPACER ── */
+    .section-block {
+      margin-bottom: 48px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 64px;
+      padding: 24px 48px;
+      border-top: 1.5px solid var(--gray-light);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 900px;
+    }
+
+    footer .badge-n { width: 28px; height: 28px; font-size: 13px; }
+
+    footer p {
+      font-size: 13px;
+      color: var(--gray-mid);
+    }
+
+    footer p strong { color: var(--black); }
+
+    /* ── FLOW SUBHEAD ── */
+    .flow-subhead {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      margin: 8px 0 16px;
+    }
+
+    .flow-subhead-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      background: var(--blue-pale);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .flow-subhead h3 {
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--black);
+    }
+
+    .sla-badge {
+      margin-left: auto;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--green-ok);
+      background: #f0fdf7;
+      border: 1.5px solid #a7f3d0;
+      padding: 3px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    /* ── HORIZONTAL FLOW ── */
+    .flow-horizontal {
+      display: flex;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-bottom: 22px;
+    }
+
+    .flow-step {
+      background: var(--white);
+      border: 1.5px solid var(--gray-light);
+      border-radius: 12px;
+      padding: 16px 18px;
+      flex: 1 1 150px;
+      min-width: 150px;
+      transition: border-color 0.18s, box-shadow 0.18s;
+    }
+
+    .flow-step:hover {
+      border-color: #b3c4ff;
+      box-shadow: 0 4px 20px rgba(26, 86, 255, 0.07);
+    }
+
+    .fs-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: var(--blue);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    .flow-step h5 {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--black);
+      margin-bottom: 5px;
+      line-height: 1.35;
+      letter-spacing: -0.2px;
+    }
+
+    .flow-step p {
+      font-size: 12.5px;
+      color: var(--gray-dark);
+      line-height: 1.55;
+    }
+
+    .flow-step .status-chip {
+      margin-top: 8px;
+    }
+
+    .flow-arrow {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      color: var(--blue-light);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .flow-arrow::before { content: '→'; }
+
+    .status-chip {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 1px 9px;
+      border-radius: 20px;
+      background: var(--blue-pale);
+      color: var(--blue);
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .flow-horizontal { flex-direction: column; align-items: stretch; }
+      .flow-step { flex: 1 1 auto; }
+      .flow-arrow { width: auto; height: 20px; }
+      .flow-arrow::before { content: '↓'; }
+    }
+
+    @media (max-width: 760px) {
+      .cards-grid-3 { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .hero, .container, footer { padding-left: 20px; padding-right: 20px; }
+      header { padding: 14px 20px; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .timeline { flex-direction: column; gap: 10px; }
+      .timeline-step:first-child { border-radius: 14px; }
+      .timeline-step:last-child  { border-radius: 14px; }
+      .timeline-step + .timeline-step { border-left: 1.5px solid var(--gray-light); }
+      .flow-subhead h3 { font-size: 16px; }
+      .sla-badge { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="badge-n">N</div>
+    <div>
+      <div class="header-label">Pago Nube · Documento interno</div>
+      <div class="header-title">Promociones con MODO</div>
+    </div>
+    <span class="header-tag">Sales &amp; Success</span>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Guía operativa completa</div>
+    <h1>Alta de promociones<br/><em>en MODO</em></h1>
+    <p class="hero-sub">Cómo funciona MODO by Pago Nube, quién hace qué en el proceso y cómo trasladar una promoción bancaria del canal offline al online a través del QR de MODO.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- CÓMO FUNCIONA MODO -->
+    <div class="section-block">
+      <div class="section-heading">Cómo funciona MODO</div>
+      <div class="cards-grid">
+        <div class="card accent-top full-width">
+          <div class="card-step">Activación</div>
+          <h3>Se activa desde el Administrador</h3>
+          <p>La activación se realiza desde el Administrador, en la configuración de medios de pago. Una vez activo, el merchant puede cobrar con QR de MODO o con la app del banco. <a href="https://ayuda.tiendanube.com/es_ES/preguntas-frecuentes-pago-nube/cobrar-con-qr-de-modo-o-app-bancaria-a-traves-de-pago-nube" target="_blank">Ver tutorial del CAN →</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONSIDERACIONES CLAVE -->
+    <div class="section-block">
+      <div class="section-heading">Consideraciones a tener en cuenta</div>
+      <div class="cards-grid">
+
+        <div class="card accent-top">
+          <div class="card-step">Requisito inicial</div>
+          <h3>El merchant debe compartirte su Carta Oferta</h3>
+          <p>Solicitale al merchant la Carta Oferta firmada con el banco. Debe incluir todos los detalles de la promoción: tarjetas, porcentaje, vigencia y condiciones.</p>
+        </div>
+
+        <div class="card accent-top warn">
+          <div class="card-step">⚠ Punto crítico — comunicar siempre</div>
+          <h3>El adquirente siempre es Payway/Prisma</h3>
+          <p>Sin importar cómo el merchant procese la promo en el offline, en MODO el adquirente es siempre <strong>Payway/Prisma</strong>. Es fundamental que el merchant valide esto con su banco antes de avanzar.</p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Tarjetas habilitadas</div>
+          <h3>Solo VISA, Mastercard y Cabal</h3>
+          <p>Únicamente se procesan promociones y se generan establecimientos para estas tres redes.</p>
+          <div class="pill-row">
+            <span class="pill ok">VISA</span>
+            <span class="pill ok">Mastercard</span>
+            <span class="pill ok">Cabal</span>
+            <span class="pill no">NaranjaX</span>
+            <span class="pill no">Amex</span>
+          </div>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Ecosistema MODO</div>
+          <h3>Solo bancos del ecosistema MODO</h3>
+          <p>MODO procesa promociones bancarias únicamente con los bancos que forman parte de su ecosistema. Verificar antes de avanzar con el merchant. <a href="https://www.modo.com.ar/bancos" target="_blank">Ver bancos habilitados →</a></p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Requisito de base</div>
+          <h3>Crédito y débito deben estar habilitados</h3>
+          <p>Todo merchant que tenga MODO by Pago Nube prendido debe tener habilitados los pagos con tarjetas de crédito y débito.</p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Financiación por defecto</div>
+          <h3>3 cuotas sin interés, siempre</h3>
+          <p>MODO ofrece por defecto <strong>3 cuotas sin interés</strong>, sin importar la configuración de cuotas del CHO transparente ni el monto mínimo configurado para cuotas sin interés. El costo de esa financiación es el mismo que el configurado para crédito y débito, estén activas o no.</p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Visibilidad de la venta</div>
+          <h3>El Admin no muestra la entidad bancaria</h3>
+          <p>En el Administrador, las ventas por MODO muestran bandera, últimos 4 dígitos y cantidad de cuotas. La entidad bancaria <strong>no</strong> aparece ahí — sí está disponible en el dashboard de dLocal.</p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">Archivo compartido</div>
+          <h3>Hoja "activos" con las promos vigentes</h3>
+          <p>En la hoja <strong>"activos"</strong> del archivo compartido MODO para promociones bancarias están detalladas las promos de los merchants que tienen la funcionalidad prendida. <a href="https://docs.google.com/spreadsheets/d/1UDjcQHFo5ZmKKY2Dv_O1P-gEcS5wp7-GmX1-TgC4Pw8/edit?gid=115820982#gid=115820982" target="_blank">Abrir archivo →</a></p>
+        </div>
+
+        <div class="card accent-top full-width">
+          <div class="card-step">Credenciales · Site ID</div>
+          <h3>Tiempos y reutilización de credenciales</h3>
+          <p>Las credenciales y Site ID son entregadas por <strong>dLocal</strong> y pueden demorar hasta <strong>10 días hábiles</strong>. Se solicitan una única vez por merchant: son genéricas y se reutilizan para todas sus promociones futuras. Una vez que las recibís, compartíselas al merchant para que se las entregue al banco.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- QUIÉN HACE QUÉ -->
+    <div class="section-block">
+      <div class="section-heading">¿Quién hace qué?</div>
+      <p class="section-intro">Tres actores participan del proceso, cada uno con un rol bien delimitado. Distinguir esto evita confusiones frecuentes, sobre todo entre lo que resuelve <strong>dLocal</strong> y lo que resuelve el <strong>banco</strong>.</p>
+      <div class="cards-grid-3">
+
+        <div class="card accent-top">
+          <div class="card-step">Pago Nube</div>
+          <h3>Gestiona el alta administrativa</h3>
+          <p>Comercial valida que el banco esté en el ecosistema MODO y que la Carta Oferta tenga todos los datos. Carga la promo y sus estados en el documento, avisa a dLocal, comparte las credenciales en el momento correcto y hace seguimiento de vigencia y renovación.</p>
+        </div>
+
+        <div class="card warn">
+          <div class="card-step">⚠ Banco (vía MODO)</div>
+          <h3>Configura cashback y cuotas</h3>
+          <p>Con el Site ID que le entrega el merchant, el <strong>banco</strong> es quien configura en MODO el cashback, las cuotas y la vigencia acordada de la promo. Ni dLocal ni Pago Nube pueden intervenir en esta configuración — depende exclusivamente del banco.</p>
+        </div>
+
+        <div class="card accent-top">
+          <div class="card-step">dLocal</div>
+          <h3>Genera el Site ID y automatiza el apagado de fees</h3>
+          <p>Entrega los establecimientos/Site ID (una sola vez por merchant) y, en el fee manager, automatiza que <strong>no se cobren fees de financiación</strong> cuando la venta corresponde a una promo vigente. No configura cashback ni cuotas — eso es responsabilidad del banco.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- FEES DE FINANCIACIÓN -->
+    <div class="section-block">
+      <div class="section-heading">¿Cómo se cobran los fees de financiación en MODO?</div>
+      <p class="section-intro">A partir de la fecha de implementación en el fee manager, dLocal automatiza el cobro de fees de financiación de la siguiente manera:</p>
+      <div class="cards-grid">
+
+        <div class="card positive">
+          <div class="card-step">Dentro de una promo vigente</div>
+          <h3>No cobramos fees de financiación</h3>
+          <p>Si la transacción es parte de una promoción vigente y cumple con sus T&amp;C, no se cobran fees de financiación. Esa tasa ya está negociada entre el banco y el merchant, como parte de las condiciones de la promo.</p>
+        </div>
+
+        <div class="card warn">
+          <div class="card-step">Fuera de una promo, pero por MODO</div>
+          <h3>Se cobran fees según el plan del merchant</h3>
+          <p>Si la transacción entra por MODO pero no forma parte de una promoción vigente, se cobran las tasas de financiación de acuerdo a la cantidad de cuotas y el plan de financiación asignado a ese merchant.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PROCESO DE CONFIGURACIÓN -->
+    <div class="section-block">
+      <div class="section-heading">Proceso de configuración de promociones</div>
+      <p class="section-intro">Hoy ofrecemos la configuración de promociones bancarias a algunos merchants del segmento <strong>MM</strong>. El acuerdo y los T&amp;C de cada promo dependen de una negociación propia entre el merchant y su banco. El flujo cambia según sea la <strong>primera</strong> promo del merchant o una <strong>posterior</strong>.</p>
+
+      <!-- ESCENARIO A -->
+      <div class="flow-subhead">
+        <span class="flow-subhead-tag">Escenario A</span>
+        <h3>Configuración inicial · primera promo del merchant</h3>
+        <span class="sla-badge">SLA dLocal · 10 días hábiles</span>
+      </div>
+      <div class="flow-horizontal">
+        <div class="flow-step">
+          <div class="fs-num">1</div>
+          <h5>Merchant comparte la Carta Oferta</h5>
+          <p>Validás banco (ecosistema MODO) y que los T&amp;C tengan todos los detalles.</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">2</div>
+          <h5>Comercial carga la promo</h5>
+          <p>Sube la Carta Oferta al <a href="https://drive.google.com/drive/folders/13RWsX5aLh_yUPSaPPT7hbJMv-HeTTD_s" target="_blank">Drive</a>, la carga en el <a href="https://docs.google.com/spreadsheets/d/1UDjcQHFo5ZmKKY2Dv_O1P-gEcS5wp7-GmX1-TgC4Pw8/edit?gid=115820982#gid=115820982" target="_blank">archivo compartido</a> y avisa a dLocal en #modo-dlocal-pagonube (arrobando a <strong>Tincho</strong>).</p>
+          <span class="status-chip">Pendiente credenciales</span>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">3</div>
+          <h5>dLocal genera el Site ID</h5>
+          <p>Configura el fee manager. Los establecimientos son genéricos y se reutilizan.</p>
+          <span class="status-chip">Pendiente dLocal → Activa</span>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">4</div>
+          <h5>Comercial comparte credenciales</h5>
+          <p>Recién cuando el status es <strong>Activa</strong>, se le entrega el Site ID al merchant.</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">5</div>
+          <h5>Banco configura cashback y cuotas</h5>
+          <p>Con el Site ID, en MODO. Recordar pedir la visualización de MODO en la tienda.</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">6</div>
+          <h5>Promo activa y vigente</h5>
+          <p>Al vencer, pasa a <strong>Expirada</strong> automáticamente.</p>
+        </div>
+      </div>
+
+      <!-- ESCENARIO B -->
+      <div class="flow-subhead">
+        <span class="flow-subhead-tag">Escenario B</span>
+        <h3>Configuraciones posteriores · merchant con Site ID ya generado</h3>
+        <span class="sla-badge">SLA dLocal · 72 hs hábiles</span>
+      </div>
+      <div class="flow-horizontal">
+        <div class="flow-step">
+          <div class="fs-num">1</div>
+          <h5>Merchant comparte nueva promo/modificación</h5>
+          <p>Validás banco (ecosistema MODO) y los T&amp;C completos. Subís la Carta Oferta al <a href="https://drive.google.com/drive/folders/13RWsX5aLh_yUPSaPPT7hbJMv-HeTTD_s" target="_blank">Drive</a>.</p>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">2</div>
+          <h5>Comercial carga la promo</h5>
+          <p>La carga en el <a href="https://docs.google.com/spreadsheets/d/1UDjcQHFo5ZmKKY2Dv_O1P-gEcS5wp7-GmX1-TgC4Pw8/edit?gid=115820982#gid=115820982" target="_blank">archivo compartido</a> y avisa en #modo-dlocal-pagonube pidiendo que la configuren en el fee manager, arrobando a <strong>@Matías Ponce de León</strong> y <strong>@Lucía Comelli</strong>.</p>
+          <span class="status-chip">Pendiente dLocal</span>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">3</div>
+          <h5>dLocal configura el fee manager</h5>
+          <p>Completa la fecha de activación en la planilla.</p>
+          <span class="status-chip">Activa</span>
+        </div>
+        <div class="flow-arrow"></div>
+        <div class="flow-step">
+          <div class="fs-num">4</div>
+          <h5>Comercial comparte credenciales existentes</h5>
+          <p>El banco configura cashback y cuotas en MODO. Recordar la visualización de MODO.</p>
+        </div>
+      </div>
+
+      <!-- CALLOUT: timing de credenciales -->
+      <div class="callout">
+        <div class="callout-icon">⏱️</div>
+        <p><strong>¿Cuándo compartir las credenciales en configuraciones posteriores?</strong> Si las compartís apenas le pedís la promo a dLocal, tené en cuenta que hasta que la configure en el fee manager el <strong>cobro de fees no está automatizado</strong>. Si esperás a que dLocal confirme la activación, te asegurás de que los fees se cobren correctamente desde el inicio.</p>
+      </div>
+    </div>
+
+    <!-- ESTADOS DE UNA PROMO -->
+    <div class="section-block">
+      <div class="section-heading">Estados de una promoción</div>
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="t-num">Estado 1</div>
+          <div class="t-label">Pendiente credenciales</div>
+          <div class="t-desc">Solo en la primera promo. Esperando que dLocal genere el Site ID.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-num">Estado 2</div>
+          <div class="t-label">Pendiente dLocal</div>
+          <div class="t-desc">dLocal debe configurar la promo en el fee manager.</div>
+        </div>
+        <div class="timeline-step active">
+          <div class="t-num">Estado 3</div>
+          <div class="t-label">Activa</div>
+          <div class="t-desc">Configurada en el fee manager. Ya podés compartir las credenciales con el merchant.</div>
+        </div>
+        <div class="timeline-step">
+          <div class="t-num">Estado 4</div>
+          <div class="t-label">Expirada</div>
+          <div class="t-desc">Venció la vigencia (automático). Comercial consulta al merchant si renueva y actualiza el documento.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- REPORTES SEMANALES -->
+    <div class="section-block">
+      <div class="section-heading">Reportes semanales</div>
+      <div class="callout info">
+        <div class="callout-icon">📊</div>
+        <p>Los días <strong>lunes</strong>, Ops completa los datos de las órdenes transaccionadas con MODO en el reporte de dLocal y los plasma en el documento interno. El equipo comercial o CX puede compartir esta información con cada merchant, filtrando las transacciones correspondientes a cada uno. <a href="https://docs.google.com/spreadsheets/d/1UyPg9Bv9wVEAhiafLDYWjUAIC2fBZDhr1r5gFMws3QY/edit?gid=1866172103#gid=1866172103" target="_blank">Abrir documento →</a></p>
+      </div>
+    </div>
+
+    <!-- AUTONOMÍA Y TIEMPOS -->
+    <div class="section-block">
+      <div class="section-heading">Gestión de expectativas</div>
+      <div class="cards-grid">
+
+        <div class="card warn">
+          <div class="card-step">⚠ Atención — autonomía limitada</div>
+          <h3>Una vez entregado el Site ID, el tiempo lo maneja el banco</h3>
+          <p>El funcionamiento y los tiempos de la configuración final dependen 100% del banco. Ni dLocal ni Pago Nube pueden interferir en ese proceso.</p>
+        </div>
+
+        <div class="card warn">
+          <div class="card-step">⚠ Tiempos del proceso</div>
+          <h3>Planificá con anticipación</h3>
+          <p>El alta de una promoción puede demorar <strong>varios días o semanas</strong>, especialmente la primera de cada merchant. Es fundamental trasladar esto con claridad y planificar desde el inicio.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CALLOUT -->
+    <div class="callout">
+      <div class="callout-icon">💬</div>
+      <p><strong>¿Tenés dudas?</strong> Ante cualquier consulta sobre el proceso, escribile al equipo de Partnerships u Ops Pago Nube. Cuanto antes arranques el proceso, más chances de tener la promo activa para la fecha que necesita el merchant.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="badge-n">N</div>
+    <p><strong>Pago Nube</strong> · Documento interno — Sales &amp; Success · Promociones con MODO</p>
+  </footer>
+
+</body>
+</html>
